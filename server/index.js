@@ -14,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://ai-mern-client-k44v.onrender.com",
     credentials: true,
   }),
 );
