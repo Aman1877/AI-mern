@@ -10,7 +10,7 @@ import InterviewReport from "./pages/InterviewReport";
 import Pricing from "./pages/Pricing";
 import { setUserData } from "./redux/userSlice";
 
-export const ServerUrl = "http://localhost:3000";
+export const ServerUrl = "https://ai-mern-srl5.onrender.com";
 
 function App() {
   const dispatch = useDispatch();
