@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import Auth from "./pages/auth";
+import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import InterviewHistory from "./pages/InterviewHistory";
 import InterviewPage from "./pages/InterviewPage";
