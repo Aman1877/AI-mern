@@ -12,9 +12,22 @@ import { setUserData } from "./redux/userSlice";
 
 export const ServerUrl = "https://ai-mern-srl5.onrender.com";
 
+if (typeof window !== "undefined") {
+  const savedToken = localStorage.getItem("token");
+  if (savedToken) {
+    axios.defaults.headers.common.Authorization = `Bearer ${savedToken}`;
+  }
+}
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (!savedToken) {
+      dispatch(setUserData(null));
+      return;
+    }
+
     const getUser = async () => {
       try {
         const result = await axios.get(ServerUrl + "/api/user/current-user", {
@@ -23,6 +36,8 @@ function App() {
         dispatch(setUserData(result?.data));
       } catch (error) {
         console.log(error);
+        localStorage.removeItem("token");
+        delete axios.defaults.headers.common.Authorization;
         dispatch(setUserData(null));
       }
     };

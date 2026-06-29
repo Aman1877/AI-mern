@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken";
 
 const isAuth = async (req, res, next) => {
-  console.log("cookies:", req.cookies);
   try {
-    let { token } = req.cookies;
+    const authHeader = req.headers.authorization;
+    const bearerToken = authHeader?.startsWith("Bearer ")
+      ? authHeader.split(" ")[1]
+      : null;
+    const cookieToken = req.cookies?.token;
+    const token = bearerToken || cookieToken;
 
     if (!token) {
       return res.status(400).json({ message: "user does not have a token" });

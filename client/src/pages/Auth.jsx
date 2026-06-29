@@ -23,7 +23,10 @@ function Auth({ isModel = false }) {
         { name, email },
         { withCredentials: true }, // for token that stored in cookie
       );
-      dispatch(setUserData(result?.data));
+      const { user, token } = result.data;
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      dispatch(setUserData(user));
     } catch (error) {
       console.log(error);
       dispatch(setUserData(null));
